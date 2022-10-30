@@ -3,17 +3,27 @@ from django.db import models
 
 class House(models.Model):
     name = models.CharField(max_length=255)
+    status = models.CharField(max_length=255, blank=True, default='vacant')
     
     def __str__(self):
         return self.name
     
 class Tenant(models.Model):
     name = models.CharField(max_length=255)
+    house_id = models.ForeignKey(House, on_delete=models.DO_NOTHING)
     fb_messenger = models.CharField(max_length=255)
     
     def __str__(self):
         return self.name
     
+class YearlyBill(models.Model):
+    year = models.IntegerField()
+    month = models.CharField(max_length=255)
+    bill_type = models.CharField(max_length=255)
+    bill = models.IntegerField()
+    
+    def __str__(self):
+        return self.year
 
 class Reading(models.Model):
     house_id = models.ForeignKey(House,on_delete=models.CASCADE)

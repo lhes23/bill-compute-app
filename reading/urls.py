@@ -7,6 +7,7 @@ router = DefaultRouter()
 router.register('readings',ReadingViewSet)
 router.register('tenants',TenantViewSet)
 router.register('houses',HouseViewSet)
+router.register('yearly-bills',YearlyBillViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Reading,Tenant, House
+from .models import Reading,Tenant, House, YearlyBill
 
 class ReadingSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,9 @@ class TenantSerializer(serializers.ModelSerializer):
 class HouseSerializer(serializers.ModelSerializer):
     class Meta:
         model = House
+        fields = "__all__"
+        
+class YearlyBillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = YearlyBill
         fields = "__all__"
