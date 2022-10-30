@@ -3,7 +3,8 @@ from django.db import models
 
 class House(models.Model):
     name = models.CharField(max_length=255)
-    status = models.CharField(max_length=255, blank=True, default='vacant')
+    is_occupied = models.BooleanField(default=False)
+    color = models.CharField(max_length=255, blank=True)
     
     def __str__(self):
         return self.name
