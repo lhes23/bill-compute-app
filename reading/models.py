@@ -21,7 +21,7 @@ class YearlyBill(models.Model):
     year = models.IntegerField()
     month = models.CharField(max_length=255)
     bill_type = models.CharField(max_length=255)
-    bill = models.IntegerField()
+    bill = models.DecimalField(max_digits=8, decimal_places=2)
     
     def __str__(self):
         return f'{str(self.year)}-{str(self.month)}-{self.bill_type}'
