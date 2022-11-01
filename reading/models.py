@@ -7,12 +7,14 @@ class House(models.Model):
     color = models.CharField(max_length=255, blank=True)
     
     def __str__(self):
-        return self.name
+        return f'{str(self.id)} - {self.name}'
     
 class Tenant(models.Model):
     name = models.CharField(max_length=255)
     house_id = models.ForeignKey(House, on_delete=models.DO_NOTHING)
     fb_messenger = models.CharField(max_length=255)
+    is_active = models.BooleanField(default=True)
+    date_started = models.DateField(auto_now_add=True,blank=True, null=True)
     
     def __str__(self):
         return self.name
