@@ -10,6 +10,6 @@ router.register('houses',HouseViewSet)
 router.register('yearly-bills',YearlyBillViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('tenants/active', TenantViewSet.getActive),
+    path('tenants/active/', TenantViewSet.getActive),
+    path('', include(router.urls))
 ]
