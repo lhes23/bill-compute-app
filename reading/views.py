@@ -26,7 +26,7 @@ class TenantViewSet(viewsets.ModelViewSet):
     #     serializer = TenantSerializer(query, many=True)
     #     return Response(serializer.data)
     
-    
+            
     @api_view(["GET","POST"])
     def getActive(request):
         match(request.method):
@@ -37,6 +37,12 @@ class TenantViewSet(viewsets.ModelViewSet):
             case "POST":
                 serializer = TenantSerializer(data=request.data)
                 if serializer.is_valid():
+                    house_id = serializer.validated_data["house_id"]
+                    tenants = Tenant.objects.filter(house_id=house_id)
+                    for t in tenants:
+                        t.is_active = False
+                        t.save()
+
                     serializer.save()
                     return Response(serializer.data,status=status.HTTP_201_CREATED)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -17,7 +17,7 @@ class Tenant(models.Model):
     date_started = models.DateField(auto_now_add=True,blank=True, null=True)
     
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.is_active} - house_id: {self.house_id}"
     
 class YearlyBill(models.Model):
     year = models.IntegerField()
