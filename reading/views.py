@@ -48,11 +48,16 @@ class TenantViewSet(viewsets.ModelViewSet):
                 serializer = TenantSerializer(data=request.data)
                 if serializer.is_valid():
                     house_id = serializer.validated_data["house_id"]
+                
                     tenants = Tenant.objects.filter(house_id=house_id)
                     for t in tenants:
                         t.is_active = False
                         t.save()
                     serializer.save()
+                    
+                    house = House.objects.get(id=house_id)
+                    house.is_occupied = True
+                    house.save()
                     return Response(serializer.data,status=status.HTTP_201_CREATED)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
