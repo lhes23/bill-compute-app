@@ -11,6 +11,15 @@ class ReadingViewSet(viewsets.ModelViewSet):
     queryset = Reading.objects.all()
     serializer_class =  ReadingSerializer
     
+    @api_view(["GET", "POST"])
+    def getActiveReadings(request):
+        match(request.method):
+            case "GET":
+                query = Reading.objects.filter(status="unpaid")
+                serializer = ReadingSerializer(query, many=True)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+                
+        
 class HouseViewSet(viewsets.ModelViewSet):
     queryset = House.objects.all()
     serializer_class = HouseSerializer
