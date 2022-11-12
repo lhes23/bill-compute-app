@@ -15,6 +15,16 @@ class HouseViewSet(viewsets.ModelViewSet):
     queryset = House.objects.all()
     serializer_class = HouseSerializer
     
+    @api_view(["GET","POST","PUT"])
+    def makeHouseVacant(request, id):
+        query = House.objects.get(id=id)
+        query.is_occupied = False
+        query.save()
+        tenantQue = Tenant.objects.filter(house_id=id)
+        for t in tenantQue:
+            t.is_active = False
+            t.save()
+        return Response({"msg":"success"})
     
 class TenantViewSet(viewsets.ModelViewSet):
     queryset = Tenant.objects.all()

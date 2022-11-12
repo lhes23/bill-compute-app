@@ -11,6 +11,6 @@ router.register('yearly-bills',YearlyBillViewSet)
 
 urlpatterns = [
     path('tenants/active/', TenantViewSet.getActive),
-    # path('tenants/active/', TenantViewSet.get_queryset),
+    path('houses/vacant/<int:id>', HouseViewSet.makeHouseVacant),
     path('', include(router.urls))
 ]
