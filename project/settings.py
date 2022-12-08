@@ -29,7 +29,9 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', env('LOCAL_HOST')]
+local_hosts = env('LOCAL_HOST')
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', local_hosts]
 
 
 # Application definition
@@ -130,8 +132,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    f"http://{env('LOCAL_HOST')}:3000"
-)
+front_port = env('FRONT_PORT')
+CORS_ORIGIN_WHITELIST = [
+    f'http://{local_hosts}:{front_port}',
+    f'http://localhost:{front_port}',
+    f'http://127.0.0.1:{front_port}',
+]
