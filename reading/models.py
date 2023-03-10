@@ -26,7 +26,7 @@ class YearlyBill(models.Model):
     bill = models.DecimalField(max_digits=8, decimal_places=2)
     
     def __str__(self):
-        return f'{str(self.year)}-{str(self.month)}-{self.bill_type}'
+        return f'{str(self.year)}-{str(self.month)}-{self.bill_type} - {self.bill}'
 
 class Reading(models.Model):
     house_id = models.ForeignKey(House,on_delete=models.CASCADE)
